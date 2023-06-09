@@ -4,8 +4,7 @@
 
 openshift: false
 
-registry: docker.io
-tag: 5.1.3
+registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
 oem:
 imagePullSecrets:
 psp: false
@@ -17,7 +16,7 @@ global: # required for rancher authentication (https://<Rancher_URL>/)
     url:
 
 internal: # enable when cert-manager is installed for the internal certificates
-  certmanager: 
+  certmanager:
     enabled: false
     secretname: neuvector-internal
 
@@ -31,8 +30,9 @@ controller:
       maxSurge: 1
       maxUnavailable: 0
   image:
-    repository: neuvector/controller
-    hash:
+    repository: suse/neuvector-csp-billing-adapter-llc/controller
+    tag: jenkins-nv-build-fleet-4829
+    hash: sha256:ac783d5cc9192e18c66b59453df6ab42ca1a94e23c43b34bab4877bc2ca01c5a
   replicas: 3
   disruptionbudget: 0
   schedulerName:
@@ -227,8 +227,9 @@ enforcer:
   # If false, enforcer will not be installed
   enabled: true
   image:
-    repository: neuvector/enforcer
-    hash:
+    repository: suse/neuvector-csp-billing-adapter-llc/enforcer
+    tag: jenkins-nv-build-fleet-4829
+    hash: sha256:26427143721b16a90ed8552d06ad01a52b4ee11fbf76e402c11a91b6d025a1e6
   updateStrategy:
     type: RollingUpdate
   priorityClassName:
@@ -253,13 +254,14 @@ enforcer:
       keyFile: tls.key
       pemFile: tls.crt
       caFile: ca.crt # must be the same CA for all internal.
-      
+
 manager:
   # If false, manager will not be installed
   enabled: true
   image:
-    repository: neuvector/manager
-    hash:
+    repository: suse/neuvector-csp-billing-adapter-llc/manager
+    tag: jenkins-nv-build-manager-3702
+    hash: sha256:9e7a4a6c28e647e10c3c4844fae2a607f9d2ee55fd1e3d2a8e84184cfc69911c
   priorityClassName:
   env:
     ssl: true
@@ -282,16 +284,16 @@ manager:
     termination: passthrough
     host:
     tls:
-      #certificate: | 
+      #certificate: |
       #  -----BEGIN CERTIFICATE-----
       #  -----END CERTIFICATE-----
-      #caCertificate: | 
+      #caCertificate: |
       #  -----BEGIN CERTIFICATE-----
       #  -----END CERTIFICATE-----
-      #destinationCACertificate: | 
+      #destinationCACertificate: |
       #  -----BEGIN CERTIFICATE-----
       #  -----END CERTIFICATE-----
-      #key: | 
+      #key: |
       #  -----BEGIN PRIVATE KEY-----
       #  -----END PRIVATE KEY-----
   certificate:
@@ -327,14 +329,14 @@ manager:
     # key1: value1
     # key2: value2
   runAsUser:  # MUST be set for Rancher hardened cluster
-  
+
 cve:
   adapter:
     enabled: false
     image:
-      repository: neuvector/registry-adapter
-      tag: 0.1.0
-      hash:
+      repository: suse/neuvector-csp-billing-adapter-llc/registry-adapter
+      tag: jenkins-nv-build-adapter-8
+      hash: sha256:64b11e47bdfb9867cb2bfb7b1eea56ad49329518f9c0df70647c40ef1ce01727
     priorityClassName:
     resources: {}
       # limits:
@@ -409,10 +411,9 @@ cve:
     enabled: true
     secure: false
     image:
-      registry: ""
-      repository: neuvector/updater
-      tag: latest
-      hash:
+      repository: suse/neuvector-csp-billing-adapter-llc/updater
+      tag: jenkins-nv-build-scanner-2108
+      hash: sha256:2904e650b055db971ba781a6a4d74591613fa83bcf02f99ab7423ed1860ea846
     schedule: "0 0 * * *"
     priorityClassName:
     podLabels: {}
@@ -431,10 +432,9 @@ cve:
         maxSurge: 1
         maxUnavailable: 0
     image:
-      registry: ""
-      repository: neuvector/scanner
-      tag: latest
-      hash:
+      repository: suse/neuvector-csp-billing-adapter-llc/scanner
+      tag: sigstore.2
+      hash: sha256:98984df2f533c8619fc643b3251000a67f2e3cc5104c12f2b355d7d0eb002f78
     priorityClassName:
     resources: {}
       # limits:
@@ -479,7 +479,7 @@ bottlerocket:
   runtimePath: /run/dockershim.sock
 
 containerd:
-  enabled: false
+  enabled: true
   path: /var/run/containerd/containerd.sock
 
 crio:
@@ -494,13 +494,13 @@ crdwebhook:
   type: ClusterIP
 
 awsbilling:
-  enabled: false
+  enabled: true
   accountNumber: ""
   roleName: ""
   serviceAccount: csp
   annotations: {}
   imagePullSecrets:
   image:
-    repository: neuvector/neuvector-csp-adapter
-    tag: 1.0.0
-    imagePullPolicy: IfNotPresent
+    repository: suse/neuvector-csp-billing-adapter-llc/csp-billing-adapter
+    tag: 0.1.1.14.8
+    hash: sha256:a82a1700a96aef3e3276b92a550a3dcb04f1cc4b9e8daaa9ce6ba02671dc901b

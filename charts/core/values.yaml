@@ -501,3 +501,27 @@ awsbilling:
     repository: neuvector/neuvector-csp-adapter
     tag: 1.0.0
     imagePullPolicy: IfNotPresent
+
+gpcbilling:
+  enabled: false
+  accountNumber: ""
+  roleName: ""
+  serviceAccount: csp
+  annotations: {}
+  imagePullSecrets:
+  image:
+    repository: neuvector/neuvector-csp-adapter
+    tag: 1.0.0
+    imagePullPolicy: IfNotPresent
+
+microsoftbilling:
+  enabled: false
+  accountNumber: ""
+  roleName: ""
+  serviceAccount: csp
+  annotations: {}
+  imagePullSecrets:
+  image:
+    repository: neuvector/neuvector-csp-adapter
+    tag: 1.0.0
+    imagePullPolicy: IfNotPresent

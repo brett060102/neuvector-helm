@@ -504,3 +504,28 @@ awsbilling:
     repository: suse/neuvector-csp-billing-adapter-llc/csp-billing-adapter
     tag: 0.3.0.17.2
     hash: sha256:b48ebec76b2e3dd4962eb70a9ed183ff61506fbd1644e5eaef9fdf28145183ec
+    imagePullPolicy: IfNotPresent
+
+gpcbilling:
+  enabled: false
+  accountNumber: ""
+  roleName: ""
+  serviceAccount: csp
+  annotations: {}
+  imagePullSecrets:
+  image:
+    repository: neuvector/neuvector-csp-adapter
+    tag: 1.0.0
+    imagePullPolicy: IfNotPresent
+
+microsoftbilling:
+  enabled: false
+  accountNumber: ""
+  roleName: ""
+  serviceAccount: csp
+  annotations: {}
+  imagePullSecrets:
+  image:
+    repository: neuvector/neuvector-csp-adapter
+    tag: 1.0.0
+    imagePullPolicy: IfNotPresent

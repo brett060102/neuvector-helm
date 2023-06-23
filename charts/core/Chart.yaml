@@ -1,7 +1,7 @@
 name: core
 apiVersion: v1
-version: 2.4.500020230621
-appVersion: 5.2.pre-beta
+version: 2.4.500020230622
+appVersion: 5.2.0-b1
 description: Helm chart for NeuVector's core services
 home: https://neuvector.com
 icon: https://avatars2.githubusercontent.com/u/19367275?s=200&v=4
